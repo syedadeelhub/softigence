@@ -386,6 +386,33 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <div class="container">
             <h2 class="margin-bottom-50">Latest <strong>works</strong></h2>
         </div>
+
+         <!-- Partners block BEGIN -->
+    <div class="partners-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                    <img src="assets/onepage/img/partners/ultima.png" alt="Ultima business solutions">
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                    <img src="assets/onepage/img/partners/wolver.png" alt="City of Wolverhampton">
+                </div>                
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                    <img src="assets/onepage/img/partners/RAE.png" alt="Royal Academy of Engineering">
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                    <img src="assets/onepage/img/partners/fos.png" alt="Financial Ombudsman Service">
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6" alt="Supporting Humanity">
+                    <img src="assets/onepage/img/partners/supportinghumanity.png" alt="Supporting Humanity">
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                    <img src="assets/onepage/img/partners/end.png" alt="End Clothing">
+                </div>               
+            </div>
+        </div>
+    </div>
+    <!-- Partners block END -->
         <div class="row">
             <div class="item col-md-2 col-sm-6 col-xs-12">
                 <img src="assets/onepage/img/portfolio/2.jpg" alt="NAME" class="img-responsive">
@@ -530,32 +557,66 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
    
     <!-- Testimonials block END -->
 
-    <!-- Partners block BEGIN -->
-    <div class="partners-block">
+   
+    <!-- Contact us new -->
+    <div class="choose-us-block content text-center margin-bottom-40" id="about">
         <div class="container">
+            <h2><strong>Contact Us</strong></h2>
+            <!--h4>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetuer adipiscing</a> elit, sed diam nonummy<br> nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</h4-->
             <div class="row">
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                    <img src="assets/onepage/img/partners/ultima.png" alt="Ultima business solutions">
+                <div class="col-md-6 col-sm-6 col-xs-12 text-left">
+                    <p><br><br><br>
+                    <img src="assets/onepage/img/contact-us.png" alt="Why to choose us" class="img-responsive">
+                </p>
                 </div>
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                    <img src="assets/onepage/img/partners/wolver.png" alt="City of Wolverhampton">
-                </div>                
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                    <img src="assets/onepage/img/partners/RAE.png" alt="Royal Academy of Engineering">
+                <div class="col-md-6 col-sm-6 col-xs-12 text-left">
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>                    
+                    <div>
+                        <form class="contact-form" action="https://api.web3forms.com/submit" id="form" method="POST">
+                                  
+                            <input type="hidden" name="access_key" value="aeab9fa4-b053-4934-8db3-4ccf2aae3359" />
+                            <input type="hidden" name="subject" value="New Contact Form Submission from Web3Forms" />
+                            <input type="hidden" name="from_name" value="https://www.softigence.co.uk" />
+                            <!-- More custom ization options available in the docs: https://docs.web3forms.com -->
+                        
+                            <div class="contactus-form-box">
+                              <label for="name" class="form-label">Name</label>
+                              
+                              <div class="input-group">                             
+                                <input id="name" name="name" class="form-control" placeholder="Your name" type="text" required/>
+                              </div>
+                              <label for="name" class="form-label">Email</label>
+                              <div class="input-group">                            
+                                <input id="email" name="email" class="form-control" placeholder="Your email" type="email" required/>
+                              </div>
+                              <label for="name" class="form-label">Phone</label>
+                              <div class="input-group">                              
+                                <input id="phone" name="phone" class="form-control" placeholder="+44 (079) 567 8888" type="text" />
+                              </div>
+                              <label for="name" class="form-label">Message</label>
+                              <div class="input-group">                              
+                                <textarea class="form-control" id="message" name="message" placeholder="Your message" required></textarea>
+                              </div>
+                            </div>
+                            <br>
+                            <button class="btn btn-primary" type="submit">Send Message</button>
+                            <p class="text-base text-center text-gray-400" id="result"></p>
+                          </form>   
+                    </div>
+                    <div class="panel-group" id="accordion1">
+                        <div class="panel">
+                            <div id="accordion1_2" class="panel-collapse">
+                                <div class="panel-body">   
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                    <img src="assets/onepage/img/partners/fos.png" alt="Financial Ombudsman Service">
-                </div>
-                <div class="col-md-2 col-sm-3 col-xs-6" alt="Supporting Humanity">
-                    <img src="assets/onepage/img/partners/supportinghumanity.png" alt="Supporting Humanity">
-                </div>
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                    <img src="assets/onepage/img/partners/end.png" alt="End Clothing">
-                </div>               
             </div>
         </div>
     </div>
-    <!-- Partners block END -->
+     <!-- Contact us new End-->   
 
     <!-- BEGIN PRE-FOOTER -->
     <div class="pre-footer" id="contact">
@@ -564,8 +625,6 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <!-- BEGIN BOTTOM ABOUT BLOCK -->
                 <div class="col-md-4 col-sm-6 pre-footer-col">
                     <h2>About us</h2>
-                    <!--p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip  commodo consequat. </p>
-                    <p>Duis autem vel eum iriure dolor vulputate velit esse molestie at dolore.</p-->
                 </div>
                 <!-- END BOTTOM ABOUT BLOCK -->
                 <!-- BEGIN TWITTER BLOCK --> 
@@ -577,24 +636,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <div class="col-md-4 col-sm-6 pre-footer-col">
                     <!-- BEGIN BOTTOM CONTACTS -->
                     <h2>Our Contacts</h2>
-                    <address class="margin-bottom-20">
-                        224, Stafford Road<br>
-                        Wallington, UK<br>
-                        Phone: +(44) 79 5557 0291 <br>
+                    <address class="margin-bottom-20">                        
                         Email: <a href="mailto:info@softigence.co.uk">info@softigence.co.uk</a>
-                    </address>
-                    <!-- END BOTTOM CONTACTS -->
-                    <div class="pre-footer-subscribe-box">
-                        <h2>Newsletter</h2>
-                        <form action="javascript:void(0);">
-                            <div class="input-group">
-                                <input type="text" placeholder="youremail@mail.com" class="form-control">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit">Subscribe</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
+                    </address>                   
                 </div>
             </div>
         </div>
@@ -617,7 +661,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <li><a class="facebook" data-original-title="facebook" href="javascript:void(0);"></a></li>
                         <li><a class="twitter" data-original-title="twitter" href="javascript:void(0);"></a></li>
                         <li><a class="googleplus" data-original-title="googleplus" href="javascript:void(0);"></a></li>
-                        <li><a class="linkedin" data-original-title="linkedin" href="javascript:void(0);"></a></li>
+                        <li><a class="linkedin" data-original-title="linkedin" href="https://www.linkedin.com/company/softigence"></a></li>
                         <li><a class="youtube" data-original-title="youtube" href="javascript:void(0);"></a></li>
                         <li><a class="vimeo" data-original-title="vimeo" href="javascript:void(0);"></a></li>
                         <li><a class="skype" data-original-title="skype" href="javascript:void(0);"></a></li>
@@ -659,6 +703,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         Layout.init();
     });
 </script>
+<script src="assets/pages/scripts/contact-us.js" type="text/javascript"></script>
 <!-- Global js END -->
 </body>
 </html>

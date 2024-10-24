@@ -3,7 +3,7 @@ body {
   color: #5f6f7e; 
   direction: ltr;
   font: 300 20px/1.4 "Open Sans", Arial, sans-serif;
-  backgrond: #fff;
+  backgrond: #ffffff;
 }
 
 /* h1-h6 */
@@ -1075,6 +1075,11 @@ Pre-Footer and pre-footer elements
   margin-top: 0;
   border-color: #404040;
 }
+.contactus-form-box .form-control{
+width: 100%;
+}
+.contactus-form-box .form-control,
+.contactus-form-box .form-control:focus
 .pre-footer .form-control,
 .pre-footer .form-control:focus {
   border: none;
@@ -1089,27 +1094,40 @@ Pre-Footer and pre-footer elements
 .pre-footer .pre-footer-subscribe-box p {
   clear: both;
 }
+.contactus-form-box .input-group,
 .pre-footer-subscribe-box .input-group {
   border: solid 1px #545454;
   padding: 1px 1px 0 0;
 }
+.contactus-form-box .input-group,
 .pre-footer-light .pre-footer-subscribe-box .input-group {
-  border: solid 1px #DBDBDB;
+  border: solid 2px #DBDBDB;
 }
 .pre-footer-subscribe-box h2 {
   padding-top: 7px;
 }
+.contactus-form-box textarea,
+.contactus-form-box input,
+.pre-footer-subscribe-box textarea,
 .pre-footer-subscribe-box input {
   border-radius: 0;
   background: #313030;
-  border: solid 1px #313030;
+  border: solid 2px #0f0f0f;
   color: #909090;
   font: 13px Arial, sans-serif;
 }
+.contactus-form-box input:focus,
+.contactus-form-box textarea:focus,
+.pre-footer-subscribe-box textarea:focus,
 .pre-footer-subscribe-box input:focus {
   box-shadow: none;
   border: solid 1px #313030;
 }
+.contactus-form-box textarea,
+.pre-footer-subscribe-box textarea {
+  min-height: 120px;
+}
+.contactus-form-box .btn-primary ,
 .pre-footer-subscribe-box .btn-primary {
   margin-left: 0 !important;
   border-bottom: none;
