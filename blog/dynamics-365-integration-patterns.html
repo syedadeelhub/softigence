@@ -86,7 +86,6 @@
                         <li><a href="../index.html#portfolio">Case Studies</a></li>
                         <li><a href="../blog/index.html">Insights</a></li>
                         <li><a href="../index.html#contact">Contact</a></li>
-                        <li><a href="tel:+447955570291"><i class="fa fa-phone"></i> 07955 570291</a></li>
                     </ul>
                 </div>
             </div>
@@ -104,13 +103,13 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-sm-12 text-left">
 <h2>Why integration patterns matter</h2>
-<p>Dynamics 365 CE is rarely the only system in an organisation's Microsoft estate. Getting the integration approach right early &mdash; rather than bolting on point-to-point connections as needs arise &mdash; is usually what separates a CRM that stays reliable for years from one that becomes fragile and hard to change. Here are the patterns we reach for most often.</p>
+<p>Dynamics 365 CE is rarely the only system in an organisation's Microsoft estate. Getting the integration approach right early, rather than bolting on point-to-point connections as needs arise, is usually what separates a CRM that stays reliable for years from one that becomes fragile and hard to change. Here are the patterns we reach for most often.</p>
 <h2>1. Plugins for synchronous, in-transaction logic</h2>
-<p>When an action needs to happen as part of the same transaction &mdash; validating data before a record saves, or calculating a field synchronously &mdash; a Dynamics 365 plugin is usually the right tool. Keep plugins focused on logic that genuinely needs to be synchronous; anything that can wait a few seconds is a better fit for the next pattern.</p>
+<p>When an action needs to happen as part of the same transaction, such as validating data before a record saves or calculating a field synchronously, a Dynamics 365 plugin is usually the right tool. Keep plugins focused on logic that genuinely needs to be synchronous; anything that can wait a few seconds is a better fit for the next pattern.</p>
 <h2>2. Power Automate / Azure Logic Apps for asynchronous workflow</h2>
-<p>For most integration work &mdash; syncing a new case to an external system, sending a notification, updating a related record in another app &mdash; an asynchronous flow triggered off a Dataverse event is more maintainable than plugin code, and easier for a wider team to support. See our note on <a href="power-automate-vs-azure-logic-apps.html">choosing between Power Automate and Azure Logic Apps</a> for how we decide which of the two to use.</p>
+<p>For most integration work, such as syncing a new case to an external system, sending a notification, or updating a related record in another app, an asynchronous flow triggered off a Dataverse event is more maintainable than plugin code, and easier for a wider team to support. See our note on <a href="power-automate-vs-azure-logic-apps.html">choosing between Power Automate and Azure Logic Apps</a> for how we decide which of the two to use.</p>
 <h2>3. Event-driven integration for high-volume or decoupled systems</h2>
-<p>When multiple downstream systems need to react to the same Dynamics 365 event, or volume is high enough that flow-per-integration becomes unwieldy, we look at an event-driven approach &mdash; Dataverse webhooks or Service Bus &mdash; so Dynamics 365 publishes an event once and each consumer subscribes independently, rather than Dynamics 365 needing to know about every downstream system directly.</p>
+<p>When multiple downstream systems need to react to the same Dynamics 365 event, or volume is high enough that flow-per-integration becomes unwieldy, we look at an event-driven approach, using Dataverse webhooks or Service Bus, so Dynamics 365 publishes an event once and each consumer subscribes independently, rather than Dynamics 365 needing to know about every downstream system directly.</p>
 <h2>4. Data virtualisation vs duplication</h2>
 <p>Not every integration needs to copy data into Dataverse. Where it's practical, reading data live from the source system (virtualisation) avoids sync issues and stale data; where performance, offline access or cross-entity relationships in Dynamics 365 require it, we duplicate data and build a clear, owned sync process rather than letting an ad-hoc one grow undocumented.</p>
 <h2>5. Error handling, idempotency and monitoring</h2>
@@ -141,7 +140,6 @@
                 <div class="col-md-4 col-sm-6 pre-footer-col">
                     <h2>Our Contacts</h2>
                     <address class="margin-bottom-20">
-                        Phone: <a href="tel:+447955570291">+44 7955 570291</a><br>
                         Email: <a href="mailto:info@softigence.co.uk">info@softigence.co.uk</a>
                     </address>
                 </div>
