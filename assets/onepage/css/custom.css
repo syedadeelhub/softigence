@@ -73,10 +73,21 @@
     border-radius: 0.375rem;
   }
 
+  .case-studies-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .case-studies-row .case-study {
+    display: flex;
+    float: none;
+  }
+
   .case-study {
     text-align: left;
     padding: 20px;
     margin-bottom: 30px;
+    flex-direction: column;
   }
 
   .case-study img {
