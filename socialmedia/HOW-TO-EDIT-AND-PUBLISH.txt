@@ -1,0 +1,104 @@
+FEEDS THAT FILL TABLES: YOUR WEBSITE FILES
+============================================
+
+What's in this folder
+---------------------
+index.html   The whole website: text, colours, layout and interactions.
+images/      Your photos, the showreel video (reel.mp4) and its cover image.
+
+Keep index.html and the images folder together. The page looks for the
+photos in "images/" next to it.
+
+
+1. PREVIEW IT
+-------------
+Double-click index.html. It opens in your browser and works offline.
+(The fonts load from Google Fonts, so they need an internet connection.)
+
+
+2. EDIT IT
+----------
+Open index.html in a free code editor. Visual Studio Code is a good one:
+https://code.visualstudio.com
+Notepad (Windows) or TextEdit (Mac, in plain-text mode) also work.
+
+The file has a labelled section for each part of the page, e.g.
+<!-- ================= SERVICES ================= -->
+
+To change...                Do this
+--------------------------  ---------------------------------------------------
+Any text                    Search for the words (Ctrl/Cmd + F) and retype them.
+Your email                  Search for fahadhashmi@softigence.co.uk and replace
+                            every copy (there are a few, including inside the
+                            mailto: links).
+A photo                     Put the new photo in images/, then change the file
+                            name in its <img src="images/..."> line. Change the
+                            alt="..." text to describe the new photo.
+A work card                 Each card is one <a href="#contact" class="card ...">
+                            block in the WORK section. Copy one to add a card,
+                            delete one to remove it. class="card reveal wide"
+                            makes a card two columns wide.
+The showreel                Replace images/reel.mp4 with your new video (keep the
+                            name, or update both <video src> lines). Vertical
+                            9:16 videos fit best. Keep it under ~10 MB so the
+                            page loads quickly.
+Colours                     The colour codes are listed at the top of the
+                            <style> section. Use Find & Replace on a code
+                            (e.g. #C8553D) to change it everywhere.
+Rotating hero words         Search for class="word" in the HERO section.
+
+Save, then refresh the page in your browser to see the change.
+
+
+3. PUT IT LIVE
+--------------
+Pick the option that matches how your website is hosted.
+
+A) You have hosting with cPanel, Plesk or FTP access (most hosting companies:
+   GoDaddy, Hostinger, 123-reg, IONOS, Bluehost, etc.)
+   1. Log in to your hosting control panel and open File Manager
+      (or connect with an FTP app such as FileZilla).
+   2. Go into the public_html folder (sometimes called www or htdocs).
+   3. Upload index.html and the whole images folder there.
+      If you already have an index.html for an old site, rename or back it
+      up first, because the new one will replace your homepage.
+   4. Visit your domain. To put the page at a sub-address instead
+      (e.g. yourdomain.com/agency), create a folder called "agency" inside
+      public_html and upload both items into it.
+
+B) You don't have hosting yet: the free, quickest route is Netlify.
+   1. Go to https://app.netlify.com/drop and create a free account.
+   2. Drag this whole folder onto the page. It goes live in seconds on
+      an address like something.netlify.app.
+   3. To use your own domain: Site configuration > Domain management >
+      Add a domain, then follow the DNS steps it shows you (you make
+      those changes where you bought your domain).
+   To update the site later, drag the edited folder onto the
+   site's Deploys page.
+   (Vercel, Cloudflare Pages and GitHub Pages work the same way.)
+
+C) Your site is on WordPress
+   - Simplest: upload the folder with your host's File Manager into a
+     sub-folder (see option A, step 4) and link to it from your menu.
+   - Or install a plugin that lets you upload a static HTML page
+     (search the plugin directory for "HTML page upload").
+   - Pasting the code into a normal WordPress page won't work well,
+     because the theme's styles and scripts clash with the page's own.
+
+D) Your site is on Wix, Squarespace, Shopify or another site builder
+   These don't let you upload your own full HTML page. Host the folder for
+   free with option B, then either:
+   - point your domain (or a subdomain like agency.yourdomain.com) at
+     the Netlify site, or
+   - add an Embed / Code block on your builder page and paste:
+     <iframe src="https://YOUR-SITE.netlify.app" style="width:100%;height:100vh;border:0"></iframe>
+     (An embed works, but a domain or subdomain gives a better result.)
+
+
+4. AFTER IT'S LIVE
+------------------
+- Open it on your phone and check the menu, the photos and the email links.
+- The email links open the visitor's email app with your address filled in.
+  Nothing is stored on a server, so no form setup is needed.
+- Smaller images load faster. If a photo is over ~500 KB, you can shrink it
+  free at https://squoosh.app before uploading.

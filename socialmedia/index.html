@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feeds that fill tables — social media for cafés and restaurants</title>
+<meta name="description" content="Social media management, reel shoots, food photography, post design, community management and Google Business optimisation for cafés and restaurants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   COLOURS (search & replace to restyle):
+   Espresso #2B1D16 · Oat cream #F4EDE2 · Terracotta #C8553D
+   Deep terracotta #A8432E · Sage #8A9A5B · Butter #E9C46A
+   ========================================================= */
+
+body{margin:0;background:#F4EDE2;}
+html{scroll-behavior:smooth;}
+*{box-sizing:border-box;}
+a{color:#A8432E;}a:hover{color:#2B1D16;}
+.serif{font-family:'Fraunces',Georgia,serif;}
+::selection{background:#C8553D;color:#F4EDE2;}
+
+/* custom cursor */
+.cur{position:fixed;left:0;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:1.5px solid #2B1D16;pointer-events:none;z-index:200;display:flex;align-items:center;justify-content:center;transition:width .25s ease,height .25s ease,margin .25s ease,background .25s ease,border-color .25s ease;mix-blend-mode:normal;}
+.cur span{font:600 12px/1 'DM Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#F4EDE2;opacity:0;transition:opacity .2s;}
+.cur.big{width:88px;height:88px;margin:-44px 0 0 -44px;background:#A8432E;border-color:#A8432E;}
+.cur.big span{opacity:1;}
+@media (hover:none){.cur,.preview{display:none !important;}}
+
+/* nav letters */
+.lt span{display:inline-block;transition:transform .35s cubic-bezier(.2,.8,.2,1),color .35s;}
+.navlink:hover .lt span{transform:translateY(-6px);color:#C8553D;}
+.navlink:focus-visible{outline:2px solid #C8553D;outline-offset:6px;}
+.lt span:nth-child(2){transition-delay:25ms}.lt span:nth-child(3){transition-delay:50ms}.lt span:nth-child(4){transition-delay:75ms}.lt span:nth-child(5){transition-delay:100ms}.lt span:nth-child(6){transition-delay:125ms}.lt span:nth-child(7){transition-delay:150ms}.lt span:nth-child(8){transition-delay:175ms}
+.navlink .arr{transition:transform .35s;}
+.navlink:hover .arr{transform:translateX(10px) rotate(-45deg);}
+
+.menu{transition:clip-path .7s cubic-bezier(.7,0,.2,1);clip-path:circle(0% at calc(100% - 64px) 44px);}
+.menu.open{clip-path:circle(150% at calc(100% - 64px) 44px);}
+
+/* hero rotating word */
+.words{display:inline-grid;}
+.word{grid-area:1/1;opacity:0;transform:translateY(60%) rotate(4deg);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1);white-space:nowrap;}
+.word.on{opacity:1;transform:none;}
+.word.gone{opacity:0;transform:translateY(-60%) rotate(-4deg);}
+
+.float1{animation:float 6s ease-in-out infinite;}
+.float2{animation:float 7s ease-in-out -2s infinite;}
+.spin{animation:spin 18s linear infinite;}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-14px) rotate(-4deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cue{animation:cue 1.8s ease-in-out infinite;}
+@keyframes cue{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* marquee */
+.marq{display:flex;width:max-content;animation:marq 32s linear infinite;}
+.marqwrap:hover .marq{animation-play-state:paused;}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* scroll reveal (progressive) */
+@supports (animation-timeline: view()){
+.reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 28%;}
+.para{animation:para linear both;animation-timeline:view();}
+}
+@keyframes rise{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:none}}
+@keyframes para{from{transform:translateY(60px)}to{transform:translateY(-60px)}}
+
+/* services */
+.svc{transition:background .4s,color .4s,padding .4s;}
+.svc:hover{background:#2B1D16;color:#F4EDE2;padding-left:28px;padding-right:28px;}
+.svc:hover .muted{color:#CDBFAE;}
+.svc .plus{transition:transform .4s;}
+.svc.open .plus{transform:rotate(45deg);}
+.svc button:focus-visible{outline:2px solid #C8553D;outline-offset:4px;}
+.preview{position:fixed;left:0;top:0;width:260px;height:320px;margin:-160px 0 0 -130px;border-radius:18px;pointer-events:none;z-index:90;transition:opacity .3s,transform .3s;opacity:0;transform:scale(.8) rotate(-4deg);}
+.preview.show{opacity:1;transform:scale(1) rotate(-4deg);}
+
+/* work */
+.card{transition:transform .25s ease-out;transform-style:preserve-3d;will-change:transform;}
+.card .shot{transition:transform .6s cubic-bezier(.2,.8,.2,1);}
+.card:hover .shot{transform:scale(1.06);}
+
+.hero-h1{max-width:calc(100% - 340px) !important;}
+@media (max-width:1100px){.hero-reel,.hero-sticker{display:none !important;}.hero-h1{max-width:100% !important;}}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+@media (max-width:1000px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:640px){.grid3{grid-template-columns:minmax(0,1fr);}}
+.imgbox{aspect-ratio:4/5;}
+.grid3 .wide{grid-column:span 2;}
+.wide .imgbox{aspect-ratio:auto;flex:1;min-height:360px;}
+@media (max-width:640px){.grid3 .wide{grid-column:auto;}.wide .imgbox{aspect-ratio:4/3;flex:none;min-height:0;}}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+.grid-svc{display:grid;grid-template-columns:72px minmax(0,1fr) 220px 48px;gap:24px;align-items:center;}
+@media (max-width:1000px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr));}.grid-svc{grid-template-columns:48px minmax(0,1fr) 40px;}.svc-tags{display:none !important;}}
+@media (max-width:640px){.grid4,.grid2{grid-template-columns:minmax(0,1fr);}.hide-sm{display:none !important;}}
+
+.btn{transition:transform .3s,background .3s,color .3s;}
+.btn:hover{transform:translateY(-3px);}
+.mail .arr{transition:transform .35s;}.mail:hover .arr{transform:translateX(8px);}
+.field{width:100%;padding:16px 18px;border-radius:12px;border:1.5px solid #5A463A;background:transparent;color:#F4EDE2;font:400 17px/1.4 'DM Sans',sans-serif;}
+.field:focus{outline:none;border-color:#E9C46A;}
+.field option{color:#2B1D16;}
+.dot{transition:width .3s,background .3s;}
+.modal{transition:opacity .35s;}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}html{scroll-behavior:auto;}}
+
+
+/* ---------- layout & components (standalone build) ---------- */
+html,body{overflow-x:clip;}
+.cur{opacity:0;}.cur.ready{opacity:1;}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#2B1D16;overflow-x:hidden;}
+.wrap{max-width:1440px;margin:0 auto;}
+.pad{padding-left:clamp(20px,5vw,72px);padding-right:clamp(20px,5vw,72px);}
+.eyebrow{margin:0 0 20px;font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
+.h2{margin:0;font-size:clamp(48px,7vw,104px);font-weight:350;letter-spacing:-.03em;line-height:1;}
+.h2 em{color:#C8553D;}
+header.top{position:fixed;top:0;left:0;right:0;z-index:120;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,4vw,56px);pointer-events:none;}
+header.top > *{pointer-events:auto;}
+.roundbtn{width:52px;height:52px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;}
+.ghost{padding:15px 24px;border-radius:999px;background:#F4EDE2;color:#2B1D16;border:1.5px solid #2B1D16;text-decoration:none;font-weight:600;font-size:15px;}
+.menu{position:fixed;inset:0;z-index:110;background:#2B1D16;color:#F4EDE2;display:flex;flex-direction:column;justify-content:center;padding:120px clamp(24px,8vw,120px) 48px;visibility:hidden;}
+.menu{transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s .7s;}
+.menu.open{visibility:visible;transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s;}
+.navlink{display:flex;align-items:baseline;gap:clamp(16px,3vw,40px);color:#F4EDE2;text-decoration:none;padding:10px 0;border-bottom:1px solid #4A372C;}
+.navnum{font-size:15px;color:#E9C46A;font-weight:600;min-width:32px;}
+.lt{font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.02em;}
+.navlink .arr{margin-left:auto;}
+.menu-foot{margin:48px 0 0;color:#CDBFAE;font-size:16px;}
+.menu-foot a{color:#E9C46A;}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px clamp(20px,5vw,72px) 56px;position:relative;}
+.hero-h1{margin:0;font-size:clamp(56px,9vw,156px);line-height:.92;font-weight:350;letter-spacing:-.035em;}
+.words{font-style:italic;color:#C8553D;}
+.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:56px;}
+.hero-row p{margin:0;max-width:460px;font-size:clamp(18px,1.6vw,21px);line-height:1.5;color:#4A372C;}
+.scroll{display:flex;align-items:center;gap:14px;color:#2B1D16;text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;}
+.cue{display:flex;width:48px;height:48px;border-radius:50%;border:1.5px solid #2B1D16;align-items:center;justify-content:center;}
+.hero-reel{position:absolute;right:clamp(24px,6vw,110px);top:130px;width:clamp(220px,19vw,290px);aspect-ratio:9/16;border-radius:28px;overflow:hidden;border:6px solid #2B1D16;background:#2B1D16;padding:0;cursor:pointer;transform:rotate(4deg);}
+.hero-reel video{width:100%;height:100%;object-fit:cover;display:block;}
+.sticker{position:absolute;right:clamp(200px,22vw,380px);top:110px;width:150px;height:150px;border-radius:50%;background:#E9C46A;display:flex;align-items:center;justify-content:center;z-index:2;}
+.sticker svg.spin{position:absolute;inset:0;}
+.tagpill{position:absolute;right:clamp(250px,23vw,400px);bottom:clamp(170px,22vh,260px);z-index:2;padding:12px 22px;border-radius:999px;background:#8A9A5B;color:#1F2412;font-weight:600;font-size:16px;}
+.marqwrap{background:#2B1D16;color:#F4EDE2;padding:26px 0;overflow:hidden;transform:rotate(-1.5deg);margin:0 -20px;}
+.marq{font-size:clamp(28px,3.4vw,48px);font-style:italic;font-weight:350;white-space:nowrap;}
+.mq{padding:0 28px;display:inline-flex;align-items:center;gap:56px;}
+.star{color:#C8553D;font-style:normal;}
+.intro{padding-top:clamp(96px,12vw,180px);padding-bottom:clamp(96px,12vw,180px);}
+.intro .big{margin:0;font-size:clamp(32px,4.4vw,64px);line-height:1.12;font-weight:350;letter-spacing:-.02em;max-width:1180px;}
+.intro em{color:#C8553D;}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:40px;}
+.sec-head p{margin:0;max-width:340px;color:#6B5A4E;font-size:17px;line-height:1.5;}
+.svc-list{border-top:1.5px solid #2B1D16;}
+.svc{border-bottom:1.5px solid #2B1D16;padding:0 4px;border-radius:4px;}
+.svc-btn{width:100%;background:none;border:none;color:inherit;text-align:left;padding:30px 0;cursor:pointer;font:inherit;}
+.svc-num{font-size:15px;font-weight:600;color:#C8553D;}
+.svc-title{font-size:clamp(28px,3.6vw,52px);font-weight:400;letter-spacing:-.02em;line-height:1.05;}
+.svc-tags{font-size:15px;color:#6B5A4E;line-height:1.4;}
+.plus{display:flex;width:44px;height:44px;border-radius:50%;border:1.5px solid currentColor;align-items:center;justify-content:center;justify-self:end;}
+.svc-body{padding:0 0 36px;align-items:start;}
+.svc-body[hidden]{display:none;}
+.svc-detail{display:flex;flex-direction:column;gap:20px;}
+.svc-detail p{margin:0;font-size:19px;line-height:1.55;max-width:620px;color:#6B5A4E;}
+.pills{display:flex;flex-wrap:wrap;gap:10px;}
+.pill{padding:9px 16px;border-radius:999px;border:1.5px solid currentColor;font-size:15px;font-weight:500;}
+.preview{overflow:hidden;background:#2B1D16;}
+.preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.preview span{position:absolute;left:14px;bottom:14px;padding:8px 14px;border-radius:999px;background:#F4EDE2;color:#2B1D16;font-size:18px;font-style:italic;font-family:'Fraunces',Georgia,serif;}
+.dark{background:#2B1D16;color:#F4EDE2;}
+.work{padding-top:clamp(96px,12vw,160px);padding-bottom:clamp(96px,12vw,160px);}
+.work .sec-head{margin-bottom:56px;}
+.reelbtn{display:flex;align-items:center;gap:16px;background:none;border:none;color:#F4EDE2;cursor:pointer;font:600 15px/1 'DM Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;}
+.reelbtn .playc{display:flex;width:64px;height:64px;border-radius:50%;background:#C8553D;align-items:center;justify-content:center;}
+.card{display:flex;flex-direction:column;gap:18px;color:#F4EDE2;text-decoration:none;}
+.card:hover{color:#F4EDE2;}
+.imgbox{border-radius:18px;overflow:hidden;background:#4A372C;position:relative;}
+.imgbox .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.tag{position:absolute;left:14px;top:14px;padding:7px 12px;border-radius:999px;background:#F4EDE2;color:#2B1D16;font-size:13px;font-weight:600;}
+.cap{display:flex;justify-content:space-between;gap:12px;align-items:baseline;}
+.cap .serif{font-size:24px;}
+.cap span:last-child{font-size:14px;color:#CDBFAE;}
+.cta-box{background:#C8553D;color:#1E120C;padding:32px;display:flex;flex-direction:column;justify-content:space-between;}
+.cta-box .k{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
+.cta-box .serif{font-size:clamp(36px,3.6vw,56px);line-height:1;font-weight:400;letter-spacing:-.02em;}
+.cta-box .go{display:flex;align-items:center;gap:12px;font-weight:700;font-size:16px;}
+.process{padding-top:clamp(96px,12vw,160px);padding-bottom:clamp(96px,12vw,160px);}
+.process .h2{margin-bottom:64px;}
+.step{display:flex;flex-direction:column;gap:16px;padding:28px;border-radius:20px;min-height:300px;}
+.step-num{font-size:15px;font-weight:600;}
+.step-title{font-size:40px;font-style:italic;font-weight:400;margin-top:auto;}
+.step-text{font-size:16px;line-height:1.5;}
+.slider{border-radius:28px;background:#E9C46A;color:#2B1D16;padding:clamp(40px,6vw,88px);position:relative;overflow:hidden;}
+.slides{display:grid;min-height:220px;}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1);min-width:0;pointer-events:none;}
+.fade.on{opacity:1;transform:none;pointer-events:auto;}
+.slide{grid-area:1/1;display:flex;flex-direction:column;gap:24px;}
+.slide p{margin:0;font-size:clamp(30px,4vw,56px);line-height:1.12;font-weight:350;letter-spacing:-.02em;max-width:1000px;}
+.slide span{font-size:16px;font-weight:600;}
+.slider-ctrl{display:flex;align-items:center;gap:16px;margin-top:40px;}
+.dots{display:flex;gap:8px;margin-left:12px;}
+.dot{height:8px;width:8px;border-radius:4px;background:rgba(43,29,22,.35);}
+.dot.on{width:32px;background:#2B1D16;}
+.slider .deco{position:absolute;right:-60px;bottom:-60px;opacity:.35;}
+.contact{padding:clamp(96px,12vw,160px) clamp(20px,5vw,72px) 48px;}
+.contact h2{margin:0;font-size:clamp(52px,8vw,120px);font-weight:350;letter-spacing:-.035em;line-height:.95;}
+.contact h2 em{color:#C8553D;}
+.contact .lede{margin:32px 0 0;color:#CDBFAE;font-size:18px;line-height:1.55;max-width:440px;}
+.mailcol{display:flex;flex-direction:column;gap:28px;align-self:end;}
+.mail{color:#F4EDE2;text-decoration:none;display:flex;flex-direction:column;gap:18px;padding-bottom:24px;border-bottom:1.5px solid #5A463A;}
+.mail:hover{color:#F4EDE2;}
+.mail .serif{font-size:clamp(28px,3.3vw,50px);font-weight:400;letter-spacing:-.02em;line-height:1.1;overflow-wrap:anywhere;}
+.mail .go{display:flex;align-items:center;gap:12px;color:#E9C46A;font-weight:600;font-size:16px;}
+.cta{align-self:flex-start;padding:20px 30px;border-radius:999px;background:#C8553D;color:#1E120C;font-weight:700;font-size:17px;text-decoration:none;}
+.cta:hover{color:#1E120C;}
+footer{max-width:1440px;margin:clamp(80px,10vw,140px) auto 0;padding-top:32px;border-top:1px solid #4A372C;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font-size:15px;color:#CDBFAE;}
+footer a{color:#F4EDE2;}
+footer a.up{color:#E9C46A;}
+.modal{position:fixed;inset:0;z-index:150;background:rgba(30,18,12,.92);display:flex;align-items:center;justify-content:center;padding:24px;}
+.modal[hidden]{display:none;}
+.modal video{height:min(84vh,820px);max-width:100%;aspect-ratio:9/16;border-radius:20px;background:#000;display:block;}
+.modal .close{position:absolute;top:24px;right:24px;background:#F4EDE2;color:#2B1D16;}
+
+</style>
+</head>
+<body>
+<div id="top">
+
+  <div class="cur" id="cursor" aria-hidden="true"><span></span></div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="top">
+    <a href="#top" class="roundbtn" aria-label="Back to top" style="background:#2B1D16;color:#F4EDE2;box-shadow:0 0 0 1.5px #F4EDE2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 9h12v4a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6V9z"></path><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"></path><path d="M9 3c0 1.5 1 1.5 1 3M13 3c0 1.5 1 1.5 1 3"></path></svg>
+    </a>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#contact" class="btn ghost hide-sm">Book a tasting call</a>
+      <button type="button" id="menuBtn" class="roundbtn" aria-expanded="false" aria-label="Open menu" style="background:#A8432E;color:#F4EDE2">
+        <svg class="ic-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"></path></svg>
+        <svg class="ic-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= FULL-SCREEN MENU ================= -->
+  <nav class="menu" id="menu" aria-label="Main">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <a class="navlink" href="#top">
+        <span class="navnum">01</span>
+        <span class="lt serif"><span>H</span><span>o</span><span>m</span><span>e</span></span>
+        <svg class="arr" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8553D" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <a class="navlink" href="#services">
+        <span class="navnum">02</span>
+        <span class="lt serif"><span>S</span><span>e</span><span>r</span><span>v</span><span>i</span><span>c</span><span>e</span><span>s</span></span>
+        <svg class="arr" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8553D" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <a class="navlink" href="#work">
+        <span class="navnum">03</span>
+        <span class="lt serif"><span>W</span><span>o</span><span>r</span><span>k</span></span>
+        <svg class="arr" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8553D" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <a class="navlink" href="#process">
+        <span class="navnum">04</span>
+        <span class="lt serif"><span>P</span><span>r</span><span>o</span><span>c</span><span>e</span><span>s</span><span>s</span></span>
+        <svg class="arr" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8553D" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <a class="navlink" href="#contact">
+        <span class="navnum">05</span>
+        <span class="lt serif"><span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span></span>
+        <svg class="arr" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8553D" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+    <p class="menu-foot">Social media for cafés, bakeries, bistros and restaurants. <a href="mailto:fahadhashmi@softigence.co.uk?subject=Let%27s%20talk%20about%20my%20caf%C3%A9">fahadhashmi@softigence.co.uk</a></p>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <p class="eyebrow" style="margin-bottom:28px;color:#A8432E">© Social media for cafés &amp; restaurants</p>
+    <h1 class="serif hero-h1">Feeds that<br>fill <span class="words" id="words"><span class="word on">tables.</span><span class="word">booths.</span><span class="word">brunch queues.</span><span class="word">takeaway bags.</span></span></h1>
+    <div class="hero-row">
+      <p>We make people hungry before they've even walked in. Reels, photography, post design, community care and Google Business, all served by one team.</p>
+      <a href="#services" class="scroll">Scroll to explore
+        <span class="cue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></span>
+      </a>
+    </div>
+
+    <button type="button" class="hero-reel" data-open-reel data-cursor="Play" aria-label="Play showreel">
+      <video src="images/reel.mp4" poster="images/reel-poster.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    </button>
+    <div class="sticker float1 hide-sm hero-sticker" aria-hidden="true">
+      <svg class="spin" viewBox="0 0 150 150" width="150" height="150">
+        <defs><path id="circ" d="M75,75 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"></path></defs>
+        <text style="font:600 13px 'DM Sans',sans-serif;letter-spacing:3px;fill:#2B1D16"><textPath href="#circ">FRESH CONTENT · SERVED DAILY · </textPath></text>
+      </svg>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2B1D16" stroke-width="1.6" stroke-linecap="round"><path d="M5 9h12v4a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6V9z"></path><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"></path></svg>
+    </div>
+    <div class="tagpill float2 hide-sm hero-sticker" aria-hidden="true">#nowserving</div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marqwrap"><div class="marq serif" aria-hidden="true"><span class="mq">Reel shoots<span class="star">✺</span></span><span class="mq">Static shots<span class="star">✺</span></span><span class="mq">Post design<span class="star">✺</span></span><span class="mq">Community care<span class="star">✺</span></span><span class="mq">Google Business<span class="star">✺</span></span><span class="mq">Social strategy<span class="star">✺</span></span><span class="mq">Reel shoots<span class="star">✺</span></span><span class="mq">Static shots<span class="star">✺</span></span><span class="mq">Post design<span class="star">✺</span></span><span class="mq">Community care<span class="star">✺</span></span><span class="mq">Google Business<span class="star">✺</span></span><span class="mq">Social strategy<span class="star">✺</span></span></div></div>
+
+  <!-- ================= INTRO ================= -->
+  <section class="intro pad wrap">
+    <p class="eyebrow reveal" style="color:#A8432E">© Culture-led, appetite-first</p>
+    <p class="reveal serif big">People eat with their eyes first, and these days their eyes are on their phones. We turn your <em>flat whites</em>, <em>sizzling pans</em> and <em>regulars</em> into content that gets saved, shared and booked.</p>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" class="pad wrap" style="padding-bottom:clamp(96px,12vw,160px)">
+    <div class="sec-head">
+      <h2 class="serif h2 reveal">On the <em>menu</em></h2>
+      <p class="reveal">Five services. Order them à la carte or as the full tasting menu.</p>
+    </div>
+    <div class="preview" id="preview" aria-hidden="true"><img alt=""><span></span></div>
+    <div class="svc-list">
+      <div class="svc open" data-img="images/valentine.jpg" data-flavour="the daily special">
+        <button type="button" class="grid-svc svc-btn" aria-expanded="true">
+          <span class="svc-num">01</span>
+          <span class="serif svc-title">Social Media Management</span>
+          <span class="muted svc-tags">Strategy · calendars · posting · reports</span>
+          <span class="plus"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+        </button>
+        <div class="grid-svc svc-body">
+          <span></span>
+          <div class="svc-detail">
+            <p class="muted">We run your social accounts end to end: a monthly content calendar built around your menu, seasons and events, posted at the times your locals actually scroll, with a clear monthly report.</p>
+            <div class="pills"><span class="pill">Content strategy</span><span class="pill">Monthly calendars</span><span class="pill">Scheduling &amp; posting</span><span class="pill">Monthly reporting</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc" data-img="images/matcha.jpg" data-flavour="shot in-house">
+        <button type="button" class="grid-svc svc-btn" aria-expanded="false">
+          <span class="svc-num">02</span>
+          <span class="serif svc-title">Content Production</span>
+          <span class="muted svc-tags">Reel shoots · static photography</span>
+          <span class="plus"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+        </button>
+        <div class="grid-svc svc-body" hidden>
+          <span></span>
+          <div class="svc-detail">
+            <p class="muted">On-site shoot days at your venue. Steam, pours, cheese pulls and the people behind the counter, captured as scroll-stopping reels and crisp stills you can use everywhere.</p>
+            <div class="pills"><span class="pill">Reel shoots</span><span class="pill">Static food shots</span><span class="pill">Behind the scenes</span><span class="pill">Food &amp; drink styling</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc" data-img="images/biryani.jpg" data-flavour="plated beautifully">
+        <button type="button" class="grid-svc svc-btn" aria-expanded="false">
+          <span class="svc-num">03</span>
+          <span class="serif svc-title">Post Design</span>
+          <span class="muted svc-tags">Carousels · menus · story templates</span>
+          <span class="plus"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+        </button>
+        <div class="grid-svc svc-body" hidden>
+          <span></span>
+          <div class="svc-detail">
+            <p class="muted">On-brand graphics that make a feed look curated: launch announcements, menu highlights, offers, event posts and reusable story templates your team can update themselves.</p>
+            <div class="pills"><span class="pill">Feed posts &amp; carousels</span><span class="pill">Story templates</span><span class="pill">Menu &amp; offer graphics</span><span class="pill">Grid planning</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc" data-img="images/latte.jpg" data-flavour="warm service">
+        <button type="button" class="grid-svc svc-btn" aria-expanded="false">
+          <span class="svc-num">04</span>
+          <span class="serif svc-title">Community Management</span>
+          <span class="muted svc-tags">Comments · DMs · reviews</span>
+          <span class="plus"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+        </button>
+        <div class="grid-svc svc-body" hidden>
+          <span></span>
+          <div class="svc-detail">
+            <p class="muted">Every comment, DM and mention answered in your voice, quickly and kindly. We turn questions into bookings, reshare your guests’ posts and keep the conversation going.</p>
+            <div class="pills"><span class="pill">Comment &amp; DM replies</span><span class="pill">Review responses</span><span class="pill">Guest content reposts</span><span class="pill">Local collaborations</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc" data-img="images/interior.jpg" data-flavour="found nearby">
+        <button type="button" class="grid-svc svc-btn" aria-expanded="false">
+          <span class="svc-num">05</span>
+          <span class="serif svc-title">Google Business Optimization</span>
+          <span class="muted svc-tags">Profile · photos · reviews · local search</span>
+          <span class="plus"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>
+        </button>
+        <div class="grid-svc svc-body" hidden>
+          <span></span>
+          <div class="svc-detail">
+            <p class="muted">When someone searches “coffee near me”, you show up looking your best: complete profile, fresh photos, correct hours and menu, regular updates and a steady review strategy.</p>
+            <div class="pills"><span class="pill">Profile setup &amp; audit</span><span class="pill">Photos &amp; menu updates</span><span class="pill">Google posts</span><span class="pill">Review strategy</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section id="work" class="dark work pad">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="serif h2 reveal">Fresh from <em style="color:#E9C46A">the pass</em></h2>
+        <button type="button" class="reelbtn btn reveal" data-open-reel data-cursor="Play">
+          <span class="playc"><svg width="22" height="22" viewBox="0 0 24 24" fill="#F4EDE2" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span>
+          Watch the showreel
+        </button>
+      </div>
+      <div class="grid3">
+        <a href="#contact" class="card reveal wide" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/breakfast.jpg" alt="Halwa puri breakfast tray with chana and chai" loading="lazy" style="object-position:center"><span class="tag">Content production</span></div>
+          <div class="cap"><span class="serif">Breakfast worth having</span><span>Tray flat-lay &amp; post</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/valentine.jpg" alt="A latte with a heart in the foam, ringed by pink roses" loading="lazy" style="object-position:center"><span class="tag">Social media</span></div>
+          <div class="cap"><span class="serif">Chai Palace</span><span>Valentine’s story</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/matcha.jpg" alt="Two iced matcha lattes topped with dried rose petals" loading="lazy" style="object-position:center"><span class="tag">Content production</span></div>
+          <div class="cap"><span class="serif">Rose matcha</span><span>Drinks styling</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/laccha.jpg" alt="Introducing our new addition: Laccha Paratha post" loading="lazy" style="object-position:center"><span class="tag">Post design</span></div>
+          <div class="cap"><span class="serif">A.R Biryani × Merath</span><span>New-item launch</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/chicken.jpg" alt="Chicken in mushroom sauce with fries, salad and lemon" loading="lazy" style="object-position:center"><span class="tag">Content production</span></div>
+          <div class="cap"><span class="serif">Creamy mushroom chicken</span><span>Flat-lay shot</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/latte.jpg" alt="Iced latte and banana bread on a wooden board" loading="lazy" style="object-position:center"><span class="tag">Content production</span></div>
+          <div class="cap"><span class="serif">Latte &amp; banana bread</span><span>Static shots</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/biryani.jpg" alt="After Iftar Menu Package 4 post with seekh kababs" loading="lazy" style="object-position:center"><span class="tag">Post design</span></div>
+          <div class="cap"><span class="serif">A.R Biryani × Merath</span><span>After-Iftar menu</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/wrap.jpg" alt="Grilled wrap cut in half with a side of sauce" loading="lazy" style="object-position:center"><span class="tag">Content production</span></div>
+          <div class="cap"><span class="serif">Grilled chicken wrap</span><span>Menu shot</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/interior.jpg" alt="Café interior with glowing arched wall lights" loading="lazy" style="object-position:center"><span class="tag">Google Business</span></div>
+          <div class="cap"><span class="serif">Golden arches</span><span>Interior shoot</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox"><img class="shot" src="images/pharmacy.jpg" alt="Meri Pharmacy healthcare campaign post" loading="lazy" style="object-position:top"><span class="tag">Post design</span></div>
+          <div class="cap"><span class="serif">Meri Pharmacy</span><span>Campaign creative</span></div>
+        </a>
+        <a href="#contact" class="card reveal" data-cursor="View">
+          <div class="imgbox cta-box">
+            <span class="k">Now taking bookings</span>
+            <span class="serif">Your table<br><em>could be next.</em></span>
+            <span class="go">Book a tasting call <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+          </div>
+          <div class="cap"><span class="serif">Your café or restaurant</span><span>Coming soon</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section id="process" class="process pad wrap">
+    <p class="eyebrow reveal" style="color:#A8432E">© How we work</p>
+    <h2 class="serif h2 reveal">From first sip<br>to <em>full house</em></h2>
+    <div class="grid4">
+      <div class="reveal step" style="background:#E9C46A;color:#2B1D16">
+        <span class="step-num">01</span>
+        <span class="serif step-title">Taste</span>
+        <span class="step-text">We visit, eat, ask questions and audit your socials and Google profile.</span>
+      </div>
+      <div class="reveal step" style="background:#8A9A5B;color:#1F2412">
+        <span class="step-num">02</span>
+        <span class="serif step-title">Plate</span>
+        <span class="step-text">A strategy and content calendar shaped around your menu and your crowd.</span>
+      </div>
+      <div class="reveal step" style="background:#A8432E;color:#F4EDE2">
+        <span class="step-num">03</span>
+        <span class="serif step-title">Serve</span>
+        <span class="step-text">Shoot days, design, posting and replying, every week, in your voice.</span>
+      </div>
+      <div class="reveal step" style="background:#2B1D16;color:#F4EDE2">
+        <span class="step-num">04</span>
+        <span class="serif step-title">Refill</span>
+        <span class="step-text">Monthly results and a fresh plan built on what made people book.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE BRING (SLIDER) ================= -->
+  <section class="pad wrap" style="padding-bottom:clamp(96px,12vw,160px)">
+    <div class="slider">
+      <p class="eyebrow" style="margin-bottom:32px">What we bring to the table</p>
+      <div class="slides" id="slides">
+          <div class="slide fade on">
+            <p class="serif">We only work with food and drink, so we know a latte-art reel from a lunch-rush reality.</p>
+            <span>Hospitality, and nothing else</span>
+          </div>
+          <div class="slide fade">
+            <p class="serif">Content that’s shot in your space, with your people, so it feels like you, not a stock photo.</p>
+            <span>Real places, real plates</span>
+          </div>
+          <div class="slide fade">
+            <p class="serif">Everything measured against what matters: covers, bookings and footfall, not just likes.</p>
+            <span>Full tables over vanity metrics</span>
+          </div>
+      </div>
+      <div class="slider-ctrl">
+        <button type="button" id="prev" class="roundbtn" aria-label="Previous" style="border:1.5px solid #2B1D16;background:transparent;color:#2B1D16"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
+        <button type="button" id="next" class="roundbtn" aria-label="Next" style="background:#2B1D16;color:#F4EDE2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        <div class="dots" id="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <svg class="spin deco" aria-hidden="true" width="260" height="260" viewBox="0 0 100 100"><g fill="none" stroke="#2B1D16" stroke-width="0.8"><circle cx="50" cy="50" r="40"></circle><path d="M50 10v80M10 50h80M22 22l56 56M78 22L22 78"></path></g></svg>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="dark contact">
+    <div class="grid2 wrap" style="gap:clamp(40px,6vw,96px);align-items:start">
+      <div>
+        <p class="eyebrow" style="color:#E9C46A">© Reservations open</p>
+        <h2 class="serif">Let's get<br>you <em>booked</em><br>out.</h2>
+        <p class="lede">Email us about your place and we'll come back with a free content audit and a few ideas you can steal, even if we never work together.</p>
+      </div>
+      <div class="mailcol">
+        <span class="eyebrow" style="margin:0;color:#CDBFAE">Drop us a line</span>
+        <a href="mailto:fahadhashmi@softigence.co.uk?subject=Let%27s%20talk%20about%20my%20caf%C3%A9" class="mail" data-cursor="Email">
+          <span class="serif">fahadhashmi@softigence.co.uk</span>
+          <span class="go">Send us an email <svg class="arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </a>
+        <a href="mailto:fahadhashmi@softigence.co.uk?subject=Let%27s%20talk%20about%20my%20caf%C3%A9" class="btn cta">Book a tasting call</a>
+      </div>
+    </div>
+    <footer>
+      <span>© <span id="year">2026</span> · Feeds that fill tables.</span>
+      <a href="mailto:fahadhashmi@softigence.co.uk?subject=Let%27s%20talk%20about%20my%20caf%C3%A9">fahadhashmi@softigence.co.uk</a>
+      <a href="#top" class="up">Back to top ↑</a>
+    </footer>
+  </section>
+
+  <!-- ================= SHOWREEL POP-UP ================= -->
+  <div class="modal" id="reel" role="dialog" aria-modal="true" aria-label="Showreel" hidden>
+    <video id="reelVideo" src="images/reel.mp4" poster="images/reel-poster.jpg" controls playsinline></video>
+    <button type="button" class="roundbtn close" id="reelClose" aria-label="Close showreel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* custom cursor */
+  var cur = $('#cursor'), curLabel = $('#cursor span');
+  document.addEventListener('mousemove', function (e) {
+    cur.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)'; cur.classList.add('ready');
+  });
+  $$('[data-cursor]').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { curLabel.textContent = el.dataset.cursor; cur.classList.add('big'); });
+    el.addEventListener('mouseleave', function () { cur.classList.remove('big'); });
+  });
+
+  /* full-screen menu */
+  var menu = $('#menu'), menuBtn = $('#menuBtn');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    $('.ic-open', menuBtn).style.display = open ? 'none' : '';
+    $('.ic-close', menuBtn).style.display = open ? '' : 'none';
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  menuBtn.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+  $$('.navlink').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+
+  /* rotating hero word */
+  var words = $$('#words .word'), w = 0;
+  setInterval(function () {
+    words[w].classList.remove('on'); words[w].classList.add('gone');
+    var old = w; setTimeout(function () { words[old].classList.remove('gone'); }, 700);
+    w = (w + 1) % words.length; words[w].classList.add('on');
+  }, 2200);
+
+  /* services accordion + photo that follows the cursor */
+  var preview = $('#preview'), pImg = $('img', preview), pTxt = $('span', preview);
+  $$('.svc').forEach(function (row) {
+    var btn = $('.svc-btn', row), body = $('.svc-body', row);
+    btn.addEventListener('click', function () {
+      var open = !row.classList.contains('open');
+      $$('.svc').forEach(function (r) { r.classList.remove('open'); $('.svc-body', r).hidden = true; $('.svc-btn', r).setAttribute('aria-expanded', 'false'); });
+      if (open) { row.classList.add('open'); body.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+    });
+    row.addEventListener('mouseenter', function () { pImg.src = row.dataset.img; pTxt.textContent = row.dataset.flavour; preview.classList.add('show'); });
+    row.addEventListener('mouseleave', function () { preview.classList.remove('show'); });
+  });
+  $('#services').addEventListener('mousemove', function (e) {
+    preview.style.left = (e.clientX + 40) + 'px'; preview.style.top = e.clientY + 'px';
+  });
+
+  /* tilting work cards */
+  $$('.card').forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(900px) rotateY(' + x * 10 + 'deg) rotateX(' + -y * 10 + 'deg)';
+    });
+    card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+  });
+
+  /* slider */
+  var slides = $$('#slides .slide'), dots = $$('#dots .dot'), s = 0;
+  function go(n) {
+    slides[s].classList.remove('on'); dots[s].classList.remove('on');
+    s = (n + slides.length) % slides.length;
+    slides[s].classList.add('on'); dots[s].classList.add('on');
+  }
+  $('#next').addEventListener('click', function () { go(s + 1); });
+  $('#prev').addEventListener('click', function () { go(s - 1); });
+  setInterval(function () { go(s + 1); }, 6000);
+
+  /* showreel pop-up */
+  var reel = $('#reel'), vid = $('#reelVideo');
+  function closeReel() { reel.hidden = true; vid.pause(); document.body.style.overflow = ''; }
+  $$('[data-open-reel]').forEach(function (b) {
+    b.addEventListener('click', function () { reel.hidden = false; document.body.style.overflow = 'hidden'; vid.currentTime = 0; vid.play(); cur.classList.remove('big'); });
+  });
+  $('#reelClose').addEventListener('click', closeReel);
+  reel.addEventListener('click', function (e) { if (e.target === reel) closeReel(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeReel(); setMenu(false); } });
+
+  $('#year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
